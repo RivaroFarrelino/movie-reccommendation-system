@@ -4,7 +4,7 @@
 
 Rekomendasi film merupakan salah satu aplikasi machine learning yang sangat populer di platform streaming dan e-commerce media hiburan. Dengan jutaan film dan pengguna, memberikan rekomendasi yang relevan dan personal menjadi tantangan utama dalam meningkatkan pengalaman pengguna dan retensi pelanggan.
 
-Dalam proyek ini, saya menggunakan dataset MovieLens 25 juta rating film yang mencakup data rating, tag, dan metadata film, untuk membangun sistem rekomendasi film menggunakan dua pendekatan utama: content-based filtering dan collaborative filtering berbasis embedding menggunakan deep learning.
+Dalam proyek ini, digunakan menggunakan dataset MovieLens 25 juta rating film yang mencakup data rating, tag, dan metadata film, untuk membangun sistem rekomendasi film menggunakan dua pendekatan utama: content-based filtering dan collaborative filtering berbasis embedding menggunakan deep learning.
 
 Sistem rekomendasi dapat membantu mengatasi masalah overload informasi (information overload) dengan menyajikan film yang paling sesuai preferensi pengguna berdasarkan histori rating dan kemiripan konten film. Studi sebelumnya menunjukkan bahwa gabungan metode content-based dan collaborative filtering dapat meningkatkan akurasi rekomendasi (Ricci et al., 2011).
 
@@ -103,7 +103,7 @@ Proses EDA dilakukan untuk memahami struktur dan karakteristik dataset secara me
 
 **Univariate Analysis**
 
-Dari enam file `.csv` yang tersedia dalam dataset, saya mengelompokkan data ke dalam tiga kategori utama berdasarkan ID-nya, yaitu data film, data pengguna (users), dan data skor relevansi film. Selanjutnya, saya melakukan analisis untuk melihat jumlah data pada masing-masing kategori.
+Dari enam file `.csv` yang tersedia dalam dataset, data dikelompokkan ke dalam tiga kategori utama berdasarkan ID-nya, yaitu data film, data pengguna (users), dan data skor relevansi film. Selanjutnya, dilakukan analisis untuk melihat jumlah data pada masing-masing kategori.
 
 * **Tag relevance scores**
 
@@ -123,7 +123,7 @@ Dari enam file `.csv` yang tersedia dalam dataset, saya mengelompokkan data ke d
       <img src ="https://github.com/RivaroFarrelino/movie-reccommendation-system/blob/main/images/user_ratings.png?raw=true" alt="users ratings">
   </p>
 
-Berdasarkan ketiga visualisasi tersebut, terdapat 1.128 tag unik dalam data genome tag, 62.423 film unik, dan 162.541 pengguna unik. Saya menilai bahwa jumlah data pada skor relevansi berdasarkan `tagId` relatif kecil, hanya sekitar 1.000 data. Jumlah ini jauh lebih sedikit jika dibandingkan dengan data pengguna dan film yang masing-masing berjumlah sekitar 162 ribu dan 62 ribu. Oleh karena itu, saya memutuskan untuk fokus mengolah data pengguna dan film saja dalam pengembangan sistem rekomendasi.
+Berdasarkan ketiga visualisasi tersebut, terdapat 1.128 tag unik dalam data genome tag, 62.423 film unik, dan 162.541 pengguna unik. Diilai bahwa jumlah data pada skor relevansi berdasarkan `tagId` relatif kecil, hanya sekitar 1.000 data. Jumlah ini jauh lebih sedikit jika dibandingkan dengan data pengguna dan film yang masing-masing berjumlah sekitar 162 ribu dan 62 ribu. Oleh karena itu, diputuskan untuk fokus mengolah data pengguna dan film saja dalam pengembangan sistem rekomendasi.
 
 
 ## Data Preparation
