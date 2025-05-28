@@ -264,16 +264,16 @@ Menggunakan TF-IDF untuk mengubah kolom genre menjadi representasi numerik (vekt
 """
 
 # Membuat objek TfidfVectorizer
-tf = TfidfVectorizer()
+tfidf_vectorizer = TfidfVectorizer()
 
 # Melatih model TF-IDF pada kolom 'genre' dari dataframe data
-tf.fit(data['genre'])
+tfidf_vectorizer.fit(data['genre'])
 
 # Mendapatkan daftar fitur (kata) yang dihasilkan oleh TfidfVectorizer
-tf.get_feature_names_out()
+tfidf_vectorizer.get_feature_names_out()
 
 # fit & transform to matrix
-tfidf_matrix = tf.fit_transform(data['genre'])
+tfidf_matrix = tfidf_vectorizer.fit_transform(data['genre'])
 
 # show matrix dimension
 tfidf_matrix.shape
@@ -284,7 +284,7 @@ tfidf_matrix.todense()
 # Membuat dataframe dari matriks tf-idf dengan baris sebagai film_name dan kolom sebagai genre
 pd.DataFrame(
     tfidf_matrix.todense(),
-    columns=tf.get_feature_names_out(),
+    columns=tfidf_vectorizer.get_feature_names_out(),
     index=data.film_name
 ).sample(n=20, axis=1).sample(n=10, axis=0)
 
@@ -331,6 +331,8 @@ def film_recommendations(film_name, similarity_data=cosine_sim_df, items=data[['
 
 # sample data
 data.sample(3)
+
+data[data.film_name.eq('The Raid 2: Berandal')]
 
 film_recommendations('The Raid 2: Berandal')
 
