@@ -77,6 +77,24 @@ genome_tags.info()
 # informasi dataset genome_scores
 genome_scores.info()
 
+print('\nMissing values in movies dataset:')
+print(movies.isnull().sum())
+
+print('\nMissing values in ratings dataset:')
+print(ratings.isnull().sum())
+
+print('\nMissing values in tags dataset:')
+print(tags.isnull().sum())
+
+print('\nMissing values in links dataset:')
+print(links.isnull().sum())
+
+print('\nMissing values in genome_tags dataset:')
+print(genome_tags.isnull().sum())
+
+print('\nMissing values in genome_scores dataset:')
+print(genome_scores.isnull().sum())
+
 """Menggabungkan dan menghapus duplikasi tagId, movieId, dan userId dari dataset yang berbeda untuk mendapatkan total keseluruhan unik. Memastikan semua data konsisten dan lengkap."""
 
 # Mengambil semua tagId unik dari kedua dataset genome_tags dan genome_scores, lalu digabungkan

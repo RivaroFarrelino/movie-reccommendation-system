@@ -58,6 +58,10 @@ Dataset yang digunakan dalam proyek ini adalah **MovieLens 25M Dataset**, yang t
 | Pemilik  | [GroupLens Research](https://grouplens.org/about/what-is-grouplens/)                           |
 | Tautan   | [https://grouplens.org/datasets/movielens/25m/](https://grouplens.org/datasets/movielens/25m/) |
 
+**Missing value dalam dataset:**
+* **File `tags.csv`** berisi 16 missing value pada kolom `tag`.
+* **File `links.csv`** berisi 107 missing value pada kolom `tmdbId`.  
+
 ### Deskripsi Variabel dalam Dataset:
 
 * **File `movies.csv`** berisi daftar 62.423 film dengan 3 atribut:
@@ -156,6 +160,18 @@ Berikut adalah teknik-teknik yang digunakan dalam tahap Data Preparation:
 
 9. **Pembersihan Nilai Kosong (Missing Values)**
    Setelah penggabungan data, dilakukan penghapusan baris yang memiliki nilai kosong untuk memastikan data bersih dan siap digunakan dalam proses analisis atau pemodelan. Langkah ini penting untuk menghindari error dan bias saat membangun model.
+
+10. **Penghapusan Film dengan Genre `(no genres listed)`**
+  Pada beberapa entri di kolom `genres`, terdapat film dengan genre yang ditandai sebagai `(no genres listed)`. Film-film tersebut dihapus dari dataset karena tidak memiliki informasi genre yang valid, sehingga tidak akan berguna untuk analisis genre ataupun rekomendasi berbasis genre.
+
+11. **Penyaringan (Filtering) Film Berdasarkan Jumlah Kemunculan `movieId` Minimal 50 Kali**
+  Untuk memastikan kualitas data, hanya film-film yang muncul minimal 50 kali pada dataset yang disimpan. Hal ini dilakukan agar model yang akan dibangun memiliki data yang cukup representatif dan tidak bias terhadap film-film dengan jumlah rating yang sangat sedikit.
+
+12. **Penghapusan Data Duplikat Berdasarkan `movieId` dan `title`**
+  Setelah proses penggabungan dan penyaringan awal, masih mungkin terdapat entri yang duplikat, baik berdasarkan `movieId` maupun `title`. Oleh karena itu, dilakukan penghapusan data duplikat agar setiap film hanya muncul sekali dan terhindar dari penghitungan ganda.
+
+13. **Penggantian String `[nS]ci-Fi` Menjadi `Scifi` pada Kolom `genres`**
+  Untuk memastikan konsistensi dalam penulisan genre, string yang sesuai dengan pola `[nS]ci-Fi` diubah menjadi `Scifi`. Perubahan ini bertujuan untuk menyeragamkan data genre sehingga memudahkan analisis selanjutnya.
 
 ### **Feature Engineering**
 
@@ -331,7 +347,7 @@ Film tersebut memiliki genre *Action, Crime, Thriller*. Dari lima film yang dire
 Dengan demikian, perhitungan Precision sebagai berikut:
 
 * **Precision = (Jumlah rekomendasi relevan) / (Jumlah total rekomendasi)**
-* **Precision = 3 / 5 = 0.6 (60%)**
+* **Precision = 5 / 5 = 1.0 (100%)**
 
 Artinya, sistem berhasil memberikan rekomendasi yang relevan sebanyak 60% dari lima film yang disarankan.
 
@@ -353,8 +369,8 @@ Selama proses pelatihan model, nilai RMSE digunakan untuk memantau penurunan kes
 
 Berdasarkan plot tersebut:
 
-* Nilai RMSE pada data **training** mencapai **0.17**
-* Nilai RMSE pada data **validasi** adalah **0.26**
+* Nilai RMSE pada data **training** mencapai **0.0321**
+* Nilai RMSE pada data **validasi** adalah **0.2550**
 
 Hal ini menunjukkan bahwa model mampu belajar dengan baik dan memberikan hasil prediksi rating yang cukup akurat. Selisih yang tidak terlalu jauh antara training dan validation loss juga menunjukkan bahwa model tidak mengalami overfitting secara signifikan.
 
@@ -362,4 +378,3 @@ Untuk pengujian acak didapatkan satu dari **ID user 2601:**
 <p align='center'>
     <img src ="https://github.com/RivaroFarrelino/movie-reccommendation-system/blob/main/images/prediksi-film-collaborative.png?raw=true" alt="output-col">
 </p>
-
